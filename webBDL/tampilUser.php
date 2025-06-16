@@ -31,8 +31,8 @@
         <td><?php echo $data['email'] ?></td>
         <td><?php echo $data['role'] ?></td>
         <td>
-            <a href="edit.php?id=<?php echo $data['idUser'] ?>">Edit</a> |
-            <a href="hapus.php?id=<?php echo $data['idUser'] ?>"onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            <a href="editUser.php?id=<?php echo $data['idUser'] ?>">Edit</a> |
+            <a href="hapusUser.php?id=<?php echo $data['idUser'] ?>"onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
         </td>
         </tr>
 
