@@ -9,7 +9,7 @@ include 'koneksiDB.php';
         <tr>
             <td>Nama User</td>
             <td>:</td>
-            <td><input type="text" name="namaUser"></td>
+            <td><input type="text" name="nama_user"></td>
         </tr>
         <tr>
             <td>Password</td>
@@ -19,7 +19,7 @@ include 'koneksiDB.php';
         <tr>
             <td>No telepon</td>
             <td>:</td>
-            <td><input type="text" name="noTelp"></td>
+            <td><input type="text" name="no_telp"></td>
         </tr>
         <tr>
             <td>Email</td>
@@ -41,14 +41,14 @@ include 'koneksiDB.php';
 
 <?php
 if (isset($_POST['tambah'])){
-    $namaUser = $_POST['namaUser'];
+    $nama_user = $_POST['nama_user'];
     $password = md5(string: $_POST['password']);
-    $noTelp = $_POST['noTelp'];
+    $no_telp = $_POST['no_telp'];
     $email = $_POST['email'];
     $role = $_POST['role'];
 
-    $query = "INSERT INTO user(namaUser, password, noTelp, email, role)
-                VALUES  ('$namaUser', '$password', '$noTelp', '$email', '$role')";
+    $query = "INSERT INTO user(nama_user, password, no_telp, email, role)
+                VALUES  ('$nama_user', '$password', '$no_telp', '$email', '$role')";
 
     if(mysqli_query($koneksi, $query)){
         header(header: "Location: tampilUser.php");

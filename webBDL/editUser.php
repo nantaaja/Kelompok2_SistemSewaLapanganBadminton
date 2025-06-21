@@ -2,7 +2,7 @@
     include 'koneksiDB.php';
 
     $id = $_GET['id'];
-    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE idUser = '$id'");
+    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id'");
     $data = mysqli_fetch_array($query);
 ?>
 
@@ -13,7 +13,7 @@
         <tr>
             <td>Nama</td>
             <td>:</td>
-            <td><input type="text" name="namaUser" value="<?php echo $data['namaUser'] ?>"></td>
+            <td><input type="text" name="nama_user" value="<?php echo $data['nama_user'] ?>"></td>
         </tr>
         <tr>
             <td>Password</td>
@@ -23,7 +23,7 @@
         <tr>
             <td>No telepon</td>
             <td>:</td>
-            <td><input type="text" name="noTelp" value="<?php echo $data['noTelp'] ?>"></td>
+            <td><input type="text" name="no_telp" value="<?php echo $data['no_telp'] ?>"></td>
         </tr>
         <tr>
             <td>Email</td>
@@ -45,18 +45,18 @@
 
 <?php
 if (isset($_POST['update'])){
-    $namaUser = $_POST['namaUser'];
+    $nama_user = $_POST['nama_user'];
     $password = md5(string: $_POST['password']);
-    $noTelp = $_POST['noTelp'];
+    $no_telp = $_POST['no_telp'];
     $email = $_POST['email'];
     $role = $_POST['role'];
 
     $query = "UPDATE user SET 
-            namaUser = '$namaUser',
+            nama_user = '$nama_user',
             password = '$password', 
-            noTelp = '$noTelp', 
+            no_telp = '$no_telp', 
             email = '$email', 
-            role = '$role' WHERE idUser = '$id'";
+            role = '$role' WHERE id_user = '$id'";
 
     if(mysqli_query($koneksi, $query)){
         header("Location: tampilUser.php");

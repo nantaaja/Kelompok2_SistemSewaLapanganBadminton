@@ -19,20 +19,20 @@
 
     <?php
     $no = 1;
-    $query = mysqli_query($koneksi, query: "SELECT * FROM user");
+    $query = mysqli_query($koneksi, "SELECT * FROM user");
     while ($data = mysqli_fetch_array($query)){
     ?>
 
     <tr>
         <td><?php echo $no++ ?></td>
-        <td><?php echo $data['namaUser'] ?></td>
+        <td><?php echo $data['nama_user'] ?></td>
         <td><?php echo $data['password'] ?></td>
-        <td><?php echo $data['noTelp'] ?></td>
+        <td><?php echo $data['no_telp'] ?></td>
         <td><?php echo $data['email'] ?></td>
         <td><?php echo $data['role'] ?></td>
         <td>
-            <a href="editUser.php?id=<?php echo $data['idUser'] ?>">Edit</a> |
-            <a href="hapusUser.php?id=<?php echo $data['idUser'] ?>"onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            <a href="editUser.php?id=<?php echo $data['id_user'] ?>">Edit</a> |
+            <a href="hapusUser.php?id=<?php echo $data['id_user'] ?>"onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
         </td>
         </tr>
 
