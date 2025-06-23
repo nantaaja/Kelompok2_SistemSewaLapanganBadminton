@@ -29,7 +29,10 @@ include 'koneksiDB.php';
         <tr>
             <td>Role</td>
             <td>:</td>
-            <td><input type="text" name="role"></td>
+            <td><select name="role" id="role">
+            <option value="customer">Customer</option>
+        </td>
+            </select>
         </tr>
         <tr>
             <td colspan="3" align="center">
@@ -40,7 +43,7 @@ include 'koneksiDB.php';
 </form>
 
 <?php
-if (isset($_POST['tambah'])){
+if (isset($_POST['tambah'])) {
     $nama_user = $_POST['nama_user'];
     $password = md5(string: $_POST['password']);
     $no_telp = $_POST['no_telp'];
@@ -50,10 +53,10 @@ if (isset($_POST['tambah'])){
     $query = "INSERT INTO user(nama_user, password, no_telp, email, role)
                 VALUES  ('$nama_user', '$password', '$no_telp', '$email', '$role')";
 
-    if(mysqli_query($koneksi, $query)){
+    if (mysqli_query($koneksi, $query)) {
         header(header: "Location: tampilUser.php");
     } else {
         echo "Gagal menambahkan data!";
     }
-} 
+}
 ?>
