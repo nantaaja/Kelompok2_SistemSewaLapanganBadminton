@@ -61,18 +61,33 @@ error_reporting(E_ALL);
         .action-links a {
             margin-right: 5px;
         }
-        .add-button {
+        .button { /* Ubah dari .add-button menjadi .button agar lebih generik */
             display: inline-block;
             padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 10px; /* Jarak bawah untuk tombol yang di atas tabel */
+            margin-right: 10px; /* Jarak antar tombol */
+            transition: background-color 0.3s ease;
+        }
+        .button.add { /* Gaya spesifik untuk tombol tambah */
             background-color: #28a745;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 10px;
         }
-        .add-button:hover {
+        .button.add:hover {
             background-color: #218838;
-            text-decoration: none;
+        }
+        .button.back { /* Gaya spesifik untuk tombol kembali */
+            background-color: #6c757d; /* Warna abu-abu */
+            color: white;
+        }
+        .button.back:hover {
+            background-color: #5a6268;
+        }
+        .button-container {
+            margin-top: 20px; /* Beri jarak dari tabel */
+            text-align: left; /* Sesuaikan jika ingin di tengah/kanan */
         }
     </style>
 </head>
@@ -80,8 +95,8 @@ error_reporting(E_ALL);
 
 <h2>Daftar Reservasi Badminton</h2>
 <hr>
-<a href="tambahReservasi.php" class="add-button">Tambah Reservasi</a>
-<hr>
+
+<a href="dashboard.php" class="button back">Kembali ke Dashboard</a>
 
 <table border="1">
     <thead>
@@ -105,7 +120,7 @@ error_reporting(E_ALL);
         $no = 1;
         // Query untuk mengambil data reservasi
         // Menggunakan JOIN untuk mengambil nama user, nama lapangan, dan detail jadwal
-        // Pastikan nama tabel di database Anda sesuai: badminton_user, badminton_lapangan, badminton_jadwal, badminton_reservasi
+        // Pastikan nama tabel di database Anda sesuai: user, lapangan, jadwal, reservasi
         $query = mysqli_query($koneksi, "
             SELECT
                 br.id_reservasi,
@@ -140,19 +155,19 @@ error_reporting(E_ALL);
         ?>
         <tr>
             <td><?php echo $no++; ?></td>
-            <td><?php echo $data['id_reservasi']; ?></td>
-            <td><?php echo $data['nama_user']; ?></td>
-            <td><?php echo $data['nama_lapangan']; ?></td>
-            <td><?php echo $data['hari']; ?></td>
+            <td><?php echo htmlspecialchars($data['id_reservasi']); ?></td>
+            <td><?php echo htmlspecialchars($data['nama_user']); ?></td>
+            <td><?php echo htmlspecialchars($data['nama_lapangan']); ?></td>
+            <td><?php echo htmlspecialchars($data['hari']); ?></td>
             <td><?php echo date('H:i', strtotime($data['jam_mulai'])); ?></td>
             <td><?php echo date('H:i', strtotime($data['jam_berakhir'])); ?></td>
             <td><?php echo date('d-m-Y', strtotime($data['tanggal_booking'])); ?></td>
-            <td><?php echo $data['durasi']; ?></td>
+            <td><?php echo htmlspecialchars($data['durasi']); ?> jam</td>
             <td><?php echo 'Rp ' . number_format($data['total_harga'], 0, ',', '.'); ?></td>
-            <td><?php echo $data['status_reservasi']; ?></td>
+            <td><?php echo htmlspecialchars($data['status_reservasi']); ?></td>
             <td class="action-links">
-                <a href="editReservasi.php?id=<?php echo $data['id_reservasi']; ?>">Edit</a> |
-                <a href="hapusReservasi.php?id=<?php echo $data['id_reservasi']; ?>" onclick="return confirm('Yakin ingin menghapus reservasi ini?')">Hapus</a>
+                <a href="editReservasi.php?id=<?php echo htmlspecialchars($data['id_reservasi']); ?>">Edit</a> |
+                <a href="hapusReservasi.php?id=<?php echo htmlspecialchars($data['id_reservasi']); ?>" onclick="return confirm('Yakin ingin menghapus reservasi ini?')">Hapus</a>
             </td>
         </tr>
         <?php
@@ -164,6 +179,10 @@ error_reporting(E_ALL);
         ?>
     </tbody>
 </table>
+
+<div class="button-container">
+    <a href="tambahReservasi.php" class="button add">Tambah Reservasi</a>
+</div>
 
 </body>
 </html>

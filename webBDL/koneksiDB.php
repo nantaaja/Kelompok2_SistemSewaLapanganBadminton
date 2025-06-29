@@ -9,6 +9,6 @@
     if($koneksi->connect_error){
         die("Koneksi Gagal");
     } else {
-        echo "Koneksi Berhasil";
+
     }
 ?>
